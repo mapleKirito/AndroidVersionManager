@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.maple.utils.CommonParam;
+
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 
@@ -37,10 +39,13 @@ public class GetNewVersion extends HttpServlet {
 		String action=request.getParameter("action");
 		
 		if(action.equals("checkNewestVersion")){
+			CommonParam cp=new CommonParam("config");
+			String verCode=cp.getString("lastVersionCode");
+			
 			JSONObject json = new JSONObject();
 			json.put("id", "1");
 			json.put("verName", "1.0.1");
-			json.put("verCode", "2");
+			json.put("verCode", verCode);
 			out.println(json);
 			out.flush();
 			out.close();
